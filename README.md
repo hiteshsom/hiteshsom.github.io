@@ -78,8 +78,8 @@ L2 Norm:  tensor([[ 0.0000,  0.0000,  0.0000, 23.7267, 11.8551, 27.9338, 10.7161
 ```
 
 
-### Observation and Inference:
-
+### Observation:
+<div align="justify">
 While comparing outputs of every hidden layer for the sentences:
 
 <br>sentence1: The capital of France is Paris. 
@@ -87,9 +87,13 @@ While comparing outputs of every hidden layer for the sentences:
 
 The L2-norm of outputs between tokens of these sentences and it can be seen that for the first 3 tokens the L2-norm was 0, which seems correct since there are same tokens in both sentences and also in same order nd hence should produce same outputs and hence L2-norm is 0. Now from 4th token onwards the tokens in both sentence differ and so does the numbers in layers become more than 0 signifying some difference in both the sentence is captured in the numbers. 
 
-Now across the layers I found the numbers to rise and drop, so basically the L2-norm for the 4th token till last token rise steadily across mid layers, whicle in later layers there is sharp increase and then there is sharp drop in last layer. The reason/intuition(also guided by experimental measurements) is basically mid layer capture information representation hence every layer just adds some more representation, while later layer capture decision making for predicting next token this was understood by activation patching (ie. causal evidence, basically if you replace the later layer of model that correctly predicts with the later layers from a model that incorrectly predicts, we see decline in accuracy but if we replace the mid layers of model with correct prediction with mid layers from a model with incorrect predictions it does not effect accuracy so much). This is also guided by logit lens (decoding evidence) i.e. if we project mid layers through output head we dont have very accurate predictions but if we project late layers we get good accuracy in prediction, I believe activation patching and logit lense does not reflect what exactly mid layer is signifying but it says that atleast the later layers does something more related to decision making than mid layers do. 
+Now across the layers I found the numbers to rise and drop, so basically the L2-norm for the 4th token till last token rise steadily across mid layers, whicle in later layers there is sharp increase and then there is sharp drop in last layer. 
+</div>
+
+### Inference
+The reason/intuition(also guided by experimental measurements) is basically mid layer capture information representation hence every layer just adds some more representation, while later layer capture decision making for predicting next token this was understood by activation patching (ie. causal evidence, basically if you replace the later layer of model that correctly predicts with the later layers from a model that incorrectly predicts, we see decline in accuracy but if we replace the mid layers of model with correct prediction with mid layers from a model with incorrect predictions it does not effect accuracy so much). This is also guided by logit lens (decoding evidence) i.e. if we project mid layers through output head we dont have very accurate predictions but if we project late layers we get good accuracy in prediction, I believe activation patching and logit lense does not reflect what exactly mid layer is signifying but it says that atleast the later layers does something more related to decision making than mid layers do. 
 
 So for now, its unclear about what information is mid layer signifying. 
 Also the last layer just compresses outputs to remove irrelevant degrees of freedeom to project into task specific subspace. 
 Now the task of LLM is to predict next token. Since the later layers were also working towards decision making and to effectively do that the model made outputs jump but the last layer, to project into task specific subspace, dropped the output. Now later layers and last layer seem to do similar thing but in exactly opposite way. So these ideas are bit conflicting and unclear.
-
+</div>
