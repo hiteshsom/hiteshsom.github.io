@@ -9,6 +9,7 @@ What does hidden state outputs in an LLM tell/mean/represent?
 Comparison of hidden state outputs of almost same sentence.
 
 #### Code
+```python
 from transformers import AutoTokenizer, AutoModel
 import torch
 
@@ -30,7 +31,6 @@ inputs_berlin = tokenizer(
     return_tensors="pt"
 )
 
-
 with torch.no_grad():
     outputs_berlin = model(**inputs_berlin, output_hidden_states=True)
 
@@ -45,8 +45,10 @@ for e_paris, e_berlin in zip(hidden_states, hidden_states_berlin):
     # print("Mean: ", mean_per_word)
     # print("Std: ", std_per_word)
     print()
+```
 
 #### Output:
+```
 The capital of France is Paris.
 L2 Norm:  tensor([[0.0000, 0.0000, 0.0000, 2.5789, 0.0000, 3.3821, 0.0000]])
 
@@ -73,7 +75,7 @@ L2 Norm:  tensor([[ 0.0000,  0.0000,  0.0000, 56.4258, 40.7219, 67.9755, 26.9553
 L2 Norm:  tensor([[ 0.0000,  0.0000,  0.0000, 59.9862, 57.2415, 76.7896, 46.9606]])
 
 L2 Norm:  tensor([[ 0.0000,  0.0000,  0.0000, 23.7267, 11.8551, 27.9338, 10.7161]])
-
+```
 
 ### Observation and Inference:
 
