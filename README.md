@@ -1,5 +1,3 @@
-# hiteshsom.github.io
-
 ## Interpretability blog
 
 ### Question:
@@ -78,6 +76,7 @@ L2 Norm:  tensor([[ 0.0000,  0.0000,  0.0000, 59.9862, 57.2415, 76.7896, 46.9606
 
 L2 Norm:  tensor([[ 0.0000,  0.0000,  0.0000, 23.7267, 11.8551, 27.9338, 10.7161]])
 ```
+
 
 ### Observation and Inference:
 
