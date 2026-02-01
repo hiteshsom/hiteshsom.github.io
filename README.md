@@ -80,7 +80,8 @@ L2 Norm:  tensor([[ 0.0000,  0.0000,  0.0000, 23.7267, 11.8551, 27.9338, 10.7161
 
 ### Observation and Inference:
 
-While comparing outputs of every hidden layer for the sentences: 
+While comparing outputs of every hidden layer for the sentences:
+
 <br>sentence1: The capital of France is Paris. 
 <br>sentence2: The capital of Germany is Berlin. 
 
