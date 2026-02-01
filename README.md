@@ -5,8 +5,10 @@
 ### Question:
 What does hidden state outputs in an LLM tell/mean/represent?
 
+
 ### Test
 Comparison of hidden state outputs of almost same sentence.
+
 
 #### Code
 ```python
@@ -80,8 +82,8 @@ L2 Norm:  tensor([[ 0.0000,  0.0000,  0.0000, 23.7267, 11.8551, 27.9338, 10.7161
 ### Observation and Inference:
 
 While comparing outputs of every hidden layer for the sentences: 
-sentence1: The capital of France is Paris. 
-sentence2: The capital of Germany is Berlin. 
+<b>sentence1: The capital of France is Paris. 
+<b>sentence2: The capital of Germany is Berlin. 
 
 The L2-norm of outputs between tokens of these sentences and it can be seen that for the first 3 tokens the L2-norm was 0, which seems correct since there are same tokens in both sentences and also in same order nd hence should produce same outputs and hence L2-norm is 0. Now from 4th token onwards the tokens in both sentence differ and so does the numbers in layers become more than 0 signifying some difference in both the sentence is captured in the numbers. 
 
