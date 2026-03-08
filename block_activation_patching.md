@@ -5,8 +5,8 @@
    Activation patching with France/Germany prompts.
 
 ## 3. Code
-```
-import torch
+
+```import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -106,11 +106,10 @@ for l in range(12):  # GPT-2 small has 12 blocks
     p_patch = patched_prob_at_layer(l)
     delta = p_patch - pB
     # Report as layer number 1..12 to match hidden_states indexing after blocks
-    print(f"{l+1:>15} | {p_patch:>30.6f} | {delta:>+16.6f}")
-```
+    print(f"{l+1:>15} | {p_patch:>30.6f} | {delta:>+16.6f}")```
 
 ## 4. Results
-  Baseline P(" Paris" | A="The capital of France is") = 0.032245
+```Baseline P(" Paris" | A="The capital of France is") = 0.032245
 Baseline P(" Paris" | B="The capital of Germany is") = 0.001311
 
 Layer-wise patching results (patching last-position residual at each block):
@@ -127,7 +126,7 @@ Layer(after block) | P(' Paris' | B patched at this layer) | Delta vs baseline B
               9 |                       0.002086 |        +0.000775
              10 |                       0.020649 |        +0.019338
              11 |                       0.034367 |        +0.033056
-             12 |                       0.000203 |        -0.001108
+             12 |                       0.000203 |        -0.001108```
 
 
 ## 5. Interpretation
