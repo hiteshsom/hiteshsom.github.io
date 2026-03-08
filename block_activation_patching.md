@@ -1,12 +1,17 @@
-## 1. Question
+# Interpretability Blog
+
+
+## Question
    Where does the decision signal for a token emerge in GPT-2?
 
-## 2. Experiment
+
+## Experiment
    Activation patching with France/Germany prompts.
 
-## 3. Code
 
-```import torch
+## Code
+```python
+import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -106,10 +111,13 @@ for l in range(12):  # GPT-2 small has 12 blocks
     p_patch = patched_prob_at_layer(l)
     delta = p_patch - pB
     # Report as layer number 1..12 to match hidden_states indexing after blocks
-    print(f"{l+1:>15} | {p_patch:>30.6f} | {delta:>+16.6f}")```
+    print(f"{l+1:>15} | {p_patch:>30.6f} | {delta:>+16.6f}")
+```
 
-## 4. Results
-```Baseline P(" Paris" | A="The capital of France is") = 0.032245
+
+## Results
+```
+Baseline P(" Paris" | A="The capital of France is") = 0.032245
 Baseline P(" Paris" | B="The capital of Germany is") = 0.001311
 
 Layer-wise patching results (patching last-position residual at each block):
@@ -126,10 +134,11 @@ Layer(after block) | P(' Paris' | B patched at this layer) | Delta vs baseline B
               9 |                       0.002086 |        +0.000775
              10 |                       0.020649 |        +0.019338
              11 |                       0.034367 |        +0.033056
-             12 |                       0.000203 |        -0.001108```
+             12 |                       0.000203 |        -0.001108
+```
 
 
-## 5. Interpretation
+## Interpretation
 
 In this experiment the residual stream representation of the final token ("is") in PromptB is replaced with the corresponding representation from PromptA. This patching is performed at each transformer layer (Layer 1 through Layer 12), and we measure the probability of the token " Paris" given PromptB.
 
@@ -141,5 +150,6 @@ Importantly, activation patching does not reveal what information earlier layers
 
 Interestingly, patching the final layer (Layer 12) reduces the probability of " Paris". This suggests that the final layer may play a role in reshaping or calibrating the representation before the output projection. However, the exact reason for this behavior cannot be determined from this experiment alone.
 
-## 6. Open questions
+
+## Open questions
    Why does layer 12 behave differently?
